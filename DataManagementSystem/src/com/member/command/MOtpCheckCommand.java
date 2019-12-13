@@ -13,7 +13,6 @@ public class MOtpCheckCommand implements Command{
 	public int execute(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		String userCode = request.getParameter("checkCode");
-		System.out.println("\n\n" + id + " " + userCode + "\n\n");
 		MemberDao dao = new MemberDao();
 		boolean ret = dao.checkCode(id, userCode);
 		if(ret == true) {

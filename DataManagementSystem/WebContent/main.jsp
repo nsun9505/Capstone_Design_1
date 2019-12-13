@@ -12,6 +12,7 @@
 	String level = (String) session.getAttribute("level");
 	request.setAttribute("id", id);
 	request.setAttribute("level", level);
+	String name = (String) session.getAttribute("name");
 %>
 
 <c:set var='f' value="value" />
@@ -23,7 +24,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>User List Main</title>
+<title>Patient List Main</title>
 <script language="JavaScript" src="main.js" charset="UTF-8"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
@@ -45,10 +46,10 @@ hr {
 <body>
 	<div>
 		<div style="text-align: center;">
-			<h1 style="font: 60px arial" size="30">Data Management System</h1>
+			<h1 style="font: 60px arial" size="30">Patient Information Management System</h1>
 		</div>
 		<div style="text-align: right;">
-			<h3><%=id%>님 반갑습니다.
+			<h3><%=name%>님 반갑습니다.
 			</h3>
 			<input type="reset" value="로그아웃" class="btn btn-default"
 				onclick="javascript:window.location='logout.jsp'">&nbsp;&nbsp;&nbsp;
