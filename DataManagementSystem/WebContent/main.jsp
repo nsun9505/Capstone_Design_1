@@ -9,9 +9,7 @@
 <%
 	}
 	String id = (String) session.getAttribute("id");
-	String level = (String) session.getAttribute("level");
 	request.setAttribute("id", id);
-	request.setAttribute("level", level);
 	String name = (String) session.getAttribute("name");
 %>
 
@@ -59,55 +57,51 @@ hr {
 	<hr>
 
 	<div class="container" style="text-align: center">
-		<form class="form-inline" action="getPacientInfo.do" method="post">
-			<div class="form-group">
-				환자 이름 : <input class="form-control" type="text" name="patient_name">
-			</div>
-			<div class=form-group>
-				<input type="submit" value="검색" class="btn btn-default">
-			</div>
+		<form action="getPacientInfo.do" method="post" class="form-horizontal">
+			  <div class="form-group">
+   				 <input type="text" class="form-control" id="pName" name="patient_name" placeholder="환자 이름" required="required" maxlength="3">
+  			</div>
+  			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-6"><input type="text" class="form-control" id="Pnumber1" name="patient_number_1" placeholder="주민번호 앞자리" required="required" maxlength="6"></div>
+					<div class="col-xs-6"><input type="text" class="form-control" id="Pnumber2" name="patient_number_2" placeholder="주민번호 뒷자리" required="required" maxlength="7"></div>
+				</div>        	
+        </div>
+  			<button type="submit" class="btn btn-default">찾기</button>
 		</form>
-		<h2>환자 정보</h2>
-
+		<h2>환자 진단 기록</h2>
 		<br>
-		<c:forEach items="${list}" var="dto">
-			<form class="form-inline" action="updateTodo.do" method="post" name="${f}${dto.data_id}">
-				<input type="hidden" name="data_id" value="${dto.data_id}">
-				<div class="form-group">
-					<input type="text" name="site_id" class="form-control"
-						style="width: 90px" value="${dto.site_id}">
-				</div>
-				<div class="form-group">
-					<input type="text" name="site_pw" class="form-control"
-						style="width: 90px" value="${dto.site_pw}">
-				</div>
-				<div class="form-group">
-					<a href="${dto.site_url}" target="_blank"> <input type="text"
-						name="site" style="background-color: white; width: 250px"
-						class="form-control" value="${dto.site_url}">
-					</a>
-				</div>
-				<div class="form-group">
-					<input type="hidden" name="data_level" class="form-control"
-						value="${dto.data_level}" readonly>
-				</div>
-				<div class="form-group">
-					<input type="text" name="data_description" class="form-control"
-						style="width: 450px" value="${dto.data_description}">
-				</div>
-				<div class=form-group>
-					<input type="button" value="삭제" class="btn btn-default"
-						onclick="deleteData(${f}${dto.data_id})">
-				</div>
-				<div class=form-group>
-					<input type="button" value="수정" class="btn btn-default"
-						onclick="modifyData(${f}${dto.data_id})">
-				</div>
-				<div class=form-group>
-					<input type="reset" value="초기화" class="btn btn-default">
-				</div>
-			</form>
-		</c:forEach>
+		<c:if test="${ list }">
+			<c:forEach items="${list}" var="dto">
+				<form action="updateTodo.do" method="post" name="${f}${dto.issue_number}" style="text-align:left">
+					<input type="hidden" name="data_id" value="${dto.issue_number}">
+					<div class="form-group">
+						<label for="dName">담당 의사</label>
+						<input type="text" name="doctor_name" id="dName" class="form-control" value="${dto.doctor_name}" readonly>
+					</div>
+					<div class="form-group">
+						<label for="pName">환자 이름</label>
+						<input type="text" name="patient_name" id="pName" class="form-control" value="${dto.patient_name}" readonly>
+					</div>
+					<div class="form-group">
+						<label for="hName">병원 이름</label>
+						<input type="text" name="hospital_name" id="hName" class="form-control" value="${dto.hospital_name}" readonly>
+					</div>
+					<div class="form-group">
+						<label for="content">진단 내용</label>
+						<input type="text" name="diagnosis_content" id="content" class="form-control" value="${dto.content}" readonly>
+					</div>
+					<div class="form-group">
+						<label for="content">진단 내용</label>
+						<input type="date" name="diagnosis_date" id="dDate" class="form-control" value="${dto.diagnosis_date}">
+					</div>
+					<div class=form-group>
+						<input type="button" value="수정" class="btn btn-default" onclick="modifyData(${f}${dto.issue_number})">
+					</div>
+				</form>
+				<hr>
+			</c:forEach>
+		</c:if>
 	</div>
 </body>
 </html>

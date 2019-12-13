@@ -16,6 +16,7 @@ import com.data.command.DListCommand;
 import com.data.command.DModifiyCommand;
 import com.doctor.command.DTAuthLicense;
 import com.employee.command.EMPAuthNumber;
+import com.hospitalsheet.command.HSGetSheet;
 import com.member.command.MGetOtpQRCode;
 import com.member.command.MIdCheckCommand;
 import com.member.command.MJoinCommand;
@@ -140,6 +141,14 @@ public class FrontController extends HttpServlet {
 				viewPage = "employeeJoinForm.jsp";
 			else
 				viewPage = "authEmployee.html";
+		} 
+		else if(com.equals("/getPacientInfo.do")) {
+			cmd = new HSGetSheet();
+			int ret = cmd.execute(request, response);
+			if(ret == 1)
+				viewPage = "getSheetOk.jsp";
+			else
+				viewPage = "getSheetFail.jsp";
 		}
 		else {
 			viewPage = "notExistCommand.jsp";

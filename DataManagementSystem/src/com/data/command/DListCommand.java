@@ -21,9 +21,6 @@ public class DListCommand implements Command{
 		System.out.println(id);
 		int level = MDao.getUserLevelById(id);
 		ArrayList<DataDto> dtos = DDao.getListById(level);
-		for(DataDto dto : dtos) {
-			System.out.println(dto.getSite_id() + " " + dto.getSite_pw() + " " + dto.getSite_url());
-		}
 		request.setAttribute("list", dtos);
 		request.setAttribute("level", level);
 		return 1;

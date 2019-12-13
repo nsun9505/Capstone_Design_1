@@ -8,8 +8,8 @@
 </head>
 <body>
 <script>
-	alert("회원 정보가 없습니다. 회원가입을 해주세요.");
+	alert("환자 정보를 찾았습니다.");
 </script>
-<jsp:include page="index.html"></jsp:include>
+<jsp:include page="main.jsp"></jsp:include>
 </body>
 </html>
