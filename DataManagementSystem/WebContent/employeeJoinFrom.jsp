@@ -2,6 +2,7 @@
     pageEncoding="EUC-KR"%>
     <%
     	String checkId = (String)request.getAttribute("checkOkId");
+    	String name = (String)session.getAttribute("name");
     %>
 <!DOCTYPE html>
 <html>
@@ -106,8 +107,10 @@
 <body>
 <div class="signup-form">
 	<form action="joinOk.do" method="post" name="joinForm">
-		<h2>회원가입</h2>
+		<h2>의사 회원 가입</h2>
 		<p class="hint-text" style="font-size:10px;">아이디, 비밀번호 : 4~14자의 영문 대소문자와 숫자로만 입력</p>
+		<input type="hidden" name="account_type" value="직원">
+		<input type="hidden" name="level" value="2">
         <div class="form-group">
 			<div class="row">
 			<%if(checkId == null){ %>
@@ -119,8 +122,9 @@
 			<% } %>
 			</div>        	
         </div>
+        <% %>
         <div class="form-group">
-        	<input type="text" class="form-control" name="name" placeholder="이름" required="required" maxlength="14">
+        	<input type="text" class="form-control" name="name" placeholder="이름" required="required" value="<%=name %>" maxlength="14" readOnly>
         </div>
 		<div class="form-group">
             <input type="password" class="form-control" id="user_pw" name="pw" placeholder="비밀번호" required="required" maxlength="14">
