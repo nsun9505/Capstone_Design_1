@@ -12,7 +12,7 @@
 	request.setAttribute("id", id);
 	session.setAttribute("id", id);
 	session.setAttribute("ValidMem", "yes");
-	response.sendRedirect("list.do");
+	response.sendRedirect("main.jsp");
 %>
 <%--
 	String id = request.getParameter("id");

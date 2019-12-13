@@ -2,6 +2,7 @@ package com.member.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.command.Command;
 import com.member.dao.MemberDao;
@@ -16,9 +17,9 @@ public class MOtpCheckCommand implements Command{
 		MemberDao dao = new MemberDao();
 		boolean ret = dao.checkCode(id, userCode);
 		if(ret == true) {
-//			System.out.println("otp check id : "+id);
-			request.setAttribute("id", id);
-//			request.setAttribute("ValidMem", "yes");
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id);
+			session.setAttribute("ValidMem", "yes");
 			return 1;
 		}
 		return 0;

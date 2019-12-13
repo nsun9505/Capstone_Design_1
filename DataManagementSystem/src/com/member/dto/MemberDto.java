@@ -5,13 +5,15 @@ public class MemberDto {
 	private String user_pw;
 	private String user_name;
 	private int user_level;
+	private String user_rank;
 	private String otpkey;
 	
-	public MemberDto(String id, String pw, String name, int user_level, String otpkey) {
+	public MemberDto(String id, String pw, String name, int user_level, String user_rank, String otpkey) {
 		this.user_id = id;
 		this.user_pw = pw;
 		this.user_name = name;
 		this.user_level = user_level;
+		this.user_rank = user_rank;
 		this.otpkey = otpkey;
 	}
 

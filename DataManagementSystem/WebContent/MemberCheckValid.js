@@ -24,6 +24,10 @@ function checkInfo() {
 	joinForm.submit();
 }
 
+function checkDupLicense(){
+	
+}
+
 function checkDupId(){
 	var re = /^[a-zA-Z0-9]{4,14}$/; // 아이디와 패스워드가 적합한지 검사할 정규식
 		
@@ -32,6 +36,19 @@ function checkDupId(){
 	if(!check(re, id, "아이디는 4~14자의 영문 대소문자와 숫자로만 입력")){
 			return;
 	}
+	joinForm.action = "idCheck.do";
+	joinForm.submit();
+}
+
+
+function checkDupId(){
+	var re = /^[a-zA-Z0-9]{4,14}$/; // 아이디와 패스워드가 적합한지 검사할 정규식
+		
+	var id = document.getElementById("user_id");
+	if(!check(re, id, "아이디는 4~14자의 영문 대소문자와 숫자로만 입력")){
+			return;
+	}
+	
 	joinForm.action = "idCheck.do";
 	joinForm.submit();
 }

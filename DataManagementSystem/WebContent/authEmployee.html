@@ -37,21 +37,18 @@
 <body>
 <div class="container">
 	<br><br><br>
-	<h1 style="text-align:center; font: 50px arial">데이터 관리 시스템</h1>
+	<h1 style="text-align:center; font: 50px arial">직원 인증</h1>
 	<div class="login-form">
-    <form action="loginCheck.do" method="post">
-        <h2 class="text-center" style="color:#63738a">Log in</h2>       
+    <form action="authEmployee.do" method="post">
+        <h2 class="text-center" style="color:#63738a">직원 인증</h2>       
         <div class="form-group">
-            <input type="text" class="form-control" name="id" placeholder="아이디" maxlength="20" required="required">
+            <input type="text" class="form-control" name="employee_number" placeholder="사원 번호" maxlength="20" required="required">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="pw" placeholder="비밀번호" maxlength="20" required="required">
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary btn-block" value="로그인">
+            <input type="submit" class="btn btn-primary btn-block" value="인증">
         </div>        
     </form>
-    <p class="text-center"><a href="selectJoinType.html" style="color:#fff">회원가입</a></p>
+    <p class="text-center"><a href="index.html" style="color:#fff">첫 화면으로 가기</a></p>
 	</div>
 </div>
 </body>

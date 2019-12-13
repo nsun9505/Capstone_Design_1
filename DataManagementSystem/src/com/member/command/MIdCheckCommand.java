@@ -9,7 +9,8 @@ import com.member.dao.MemberDao;
 public class MIdCheckCommand implements Command{
 	public int execute(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
-		
+		String type = request.getParameter("account_type");
+		System.out.println(type);
 		MemberDao dao = new MemberDao();
 		int ret = dao.checkUserId(id);
 		if(ret == 1)

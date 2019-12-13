@@ -32,26 +32,19 @@
         font-weight: bold;
     }
 </style>
-<title>데이터 관리 시스템</title>
+<title>회원 타입 선택</title>
 </head>
 <body>
 <div class="container">
 	<br><br><br>
-	<h1 style="text-align:center; font: 50px arial">데이터 관리 시스템</h1>
+	<h1 style="text-align:center; font: 50px arial">회원 타입 선택</h1>
 	<div class="login-form">
     <form action="loginCheck.do" method="post">
-        <h2 class="text-center" style="color:#63738a">Log in</h2>       
-        <div class="form-group">
-            <input type="text" class="form-control" name="id" placeholder="아이디" maxlength="20" required="required">
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" name="pw" placeholder="비밀번호" maxlength="20" required="required">
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary btn-block" value="로그인">
-        </div>        
+        <h5 class="text-center" style="color:#63738a">의사와 직원 중에 선택해주세요.</h5>  
+        <div class="form-group"><a href="authDoctor.html"><input type="button" class="btn btn-primary btn-block" value="의사 가입"></a></div>
+        <div class="form-group"><a href="authEmployee.html"><input type="button" class="btn btn-primary btn-block" value="직원 가입"></a></div>        
     </form>
-    <p class="text-center"><a href="selectJoinType.html" style="color:#fff">회원가입</a></p>
+    <p class="text-center"><a href="index.html" style="color:#fff">로그인 창으로</a></p>
 	</div>
 </div>
 </body>

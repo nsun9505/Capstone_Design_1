@@ -12,9 +12,11 @@ public class MJoinCommand implements Command{
 		String user_name = request.getParameter("name");
 		String user_id = request.getParameter("id");
 		String user_pw = request.getParameter("pw");
+		String user_level = request.getParameter("level");
+		String user_account_type = request.getParameter("account_type");
 		System.out.println(user_name + " " + user_id + " " + user_pw);
 		MemberDao dao = new MemberDao();
-		int ret = dao.joinMember(user_id, user_pw, user_name, 1);
+		int ret = dao.joinMember(user_id, user_pw, user_name, user_level, user_account_type);
 		return ret;
 	}
 }

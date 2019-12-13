@@ -22,14 +22,14 @@ import org.apache.commons.codec.binary.Base32;
 public class MemberDao {
 	DataSource dataSrc;
 	private static final String HOST = "computer.knu.ac.kr";
-	private static final String userPassUpdateQuery = "update member set pw=? where user_id=?";
-	private static final String getPassQuery = "select User_pw from member where user_id=?";
-	private static final String deleteQuery = "delete from member where user_id=?";
-	private static final String checkQuery = "select * from member where user_id = ? AND user_pw = ?";
-	private static final String insertQuery = "insert into member values(?,?,?,?,?)";
-	private static final String idCheckQuery = "select * from member where user_id = ?";
+	private static final String userPassUpdateQuery = "update login set pw=? where login_id=?";
+	private static final String getPassQuery = "select login_pw from login where login_id=?";
+	private static final String deleteQuery = "delete from login where login_id=?";
+	private static final String checkQuery = "select * from login where login_id = ? AND login_pw = ?";
+	private static final String insertQuery = "insert into login values(?,?,?,?,?,?)";
+	private static final String idCheckQuery = "select * from login where login_id = ?";
 //	private static final String UpdateOTPKeyQuery = "update member set otpkey = ? where id = ?";
-	private static final String getOtpKeyQuery = "select otpkey from member where user_id = ?";
+	private static final String getOtpKeyQuery = "select login_otp from login where login_id = ?";
 	public MemberDao() {
 		try {
 			Context context = new InitialContext();
@@ -39,10 +39,11 @@ public class MemberDao {
 		}
 	}
 	
-	public int joinMember(String user_id, String user_pw, String user_name, int level) {
+	public int joinMember(String user_id, String user_pw, String user_name, String user_level, String user_account_type) {
 		int ret = 0;
 		Connection conn = null;
 		PreparedStatement preStmt = null;
+		int level = Integer.parseInt(user_level);
 		try {
 			conn = dataSrc.getConnection();
 			preStmt = conn.prepareStatement(insertQuery);
@@ -50,7 +51,8 @@ public class MemberDao {
 			preStmt.setString(2, user_pw);
 			preStmt.setString(3, user_name);
 			preStmt.setInt(4, level);
-			preStmt.setString(5, generate(user_id));
+			preStmt.setString(5, user_account_type);
+			preStmt.setString(6, generate(user_id));
 			ret = preStmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -77,7 +79,7 @@ public class MemberDao {
 			preStmt.setString(2, pw);
 			rSet = preStmt.executeQuery();
 			if(rSet.next())
-				if(id.equals(rSet.getString("user_id")) && pw.equals(rSet.getString("user_pw")))
+				if(id.equals(rSet.getString("login_id")) && pw.equals(rSet.getString("login_pw")))
 					ret = 1;		// login success
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -188,7 +190,7 @@ public class MemberDao {
 			preStmt.setString(1, id);
 			rSet = preStmt.executeQuery();
 			if(rSet.next())
-				level = rSet.getInt("user_level");
+				level = rSet.getInt("login_level");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -285,7 +287,7 @@ public class MemberDao {
 			preStmt.setString(1, user_id);
 			rSet = preStmt.executeQuery();
 			if(rSet.next())
-				otpkey = rSet.getString("otpkey");
+				otpkey = rSet.getString("login_otp");
 			System.out.println(otpkey);
 		} catch (Exception e) {
 			e.printStackTrace();

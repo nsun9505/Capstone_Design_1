@@ -20,8 +20,8 @@ import org.apache.commons.codec.binary.Base32;
 
 public class OtpDao {
 	private DataSource dataSrc;
-	private static final String UpdateOTPKeyQuery = "update member set otpkey = ? where id = ?";
-	private static final String getOtpKeyQuery = "select otpkey from member where id = ?";
+	private static final String UpdateOTPKeyQuery = "update login set otpkey = ? where id = ?";
+	private static final String getOtpKeyQuery = "select otpkey from login where id = ?";
 	public OtpDao() {
 		try {
 			Context context = new InitialContext();
@@ -54,7 +54,6 @@ public class OtpDao {
 				System.err.println("sql error : " + e.getMessage());
 			}
 		}
-		
 		return otpKey;
 	}
 
