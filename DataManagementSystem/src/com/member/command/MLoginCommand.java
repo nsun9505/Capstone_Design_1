@@ -2,8 +2,13 @@ package com.member.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.command.Command;
+import com.doctor.dao.DoctorDAO;
+import com.doctor.dto.DoctorDTO;
+import com.employee.dao.EmployeeDAO;
+import com.employee.dto.EmployeeDTO;
 import com.member.dao.MemberDao;
 
 public class MLoginCommand implements Command{
@@ -15,10 +20,21 @@ public class MLoginCommand implements Command{
 		
 		MemberDao dao = new MemberDao();
 		int ret = dao.memberCheck(user_id, user_pw);
-		if(ret == 1)
+		if(ret == 1) {
 			request.setAttribute("id", user_id);
-		System.out.println(user_id + " " + user_pw);
-//		System.out.println("logincheck : " + ret);
+			EmployeeDAO EDao = new EmployeeDAO();
+			EmployeeDTO EDto = EDao.isExistEmployee(Integer.parseInt(user_id));
+			HttpSession session = request.getSession();
+			if(EDto == null) {
+				DoctorDAO DDao = new DoctorDAO();
+				DoctorDTO DDto = DDao.isExistDoctor(Integer.parseInt(user_id));
+				session.setAttribute("name", DDto.getName());
+				session.setAttribute("hospital_name", DDto.getHospital_name());
+			} else {
+				session.setAttribute("name", EDto.getName());
+				session.setAttribute("hospital_name", EDto.getHospital_name());
+			}
+		}
 		return ret;
 	}
 }

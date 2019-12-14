@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.command.Command;
 import com.data.dto.DataDto;
@@ -22,9 +23,13 @@ public class HSGetSheet implements Command{
 		PatientDAO PDao = new PatientDAO();
 		
 		if(PDao.isExistPatient(patient_name, patient_number)) {
+			System.out.println("환자 존재");
+			HttpSession session = request.getSession();
 			HospitalSheetDAO dao = new HospitalSheetDAO();
 			ArrayList<SimpleHospitalSheetDTO> dtos = dao.getListById(patient_name, patient_number);
 			request.setAttribute("list", dtos);
+			session.setAttribute("search_patient_name", patient_name);
+			session.setAttribute("search_patient_number", patient_number);
 			return 1;
 		}
 		return 0;

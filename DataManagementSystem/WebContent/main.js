@@ -8,14 +8,14 @@ function popup(id){
 	window.open(url, "modify", "width=360px,height='500px,resizable=0,toolbars=no,scrollbars=no");
 }
 
-function addData(frmName){
-	frmName.action="addData.do";
-	frmName.submit();
+function addData(){
+	var url = "addDataForm.jsp";
+	window.open(url, "addForm", "width=600px,height='600px,resizable=0,toolbars=no,scrollbars=no");
 }
 
 function modifyData(frmName){
-	frmName.action="modifyData.do";
-	frmName.submit();
+	var url = "modifyData.do";
+	window.open(url, "modify", "width=360px,height='500px,resizable=0,toolbars=no,scrollbars=no");
 }
 
 function deleteData(frmName){
@@ -41,4 +41,6 @@ function check(){
 	return;
 }
 
-function showPopup() { window.open("08_2_popup.html", "a", "width=400, height=300, left=100, top=50"); }
+function showPopup() { 
+	window.open("addDataForm.jsp", "a", "width=500, height=600, left=100, top=50");
+	}

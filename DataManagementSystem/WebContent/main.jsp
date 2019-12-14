@@ -11,6 +11,9 @@
 	String id = (String) session.getAttribute("id");
 	request.setAttribute("id", id);
 	String name = (String) session.getAttribute("name");
+	String hospital_name = (String) session.getAttribute("hospital_name");
+	String patient_name = (String)session.getAttribute("search_patient_name");
+	String patient_number = (String)session.getAttribute("search_patient_number");
 %>
 
 <c:set var='f' value="value" />
@@ -23,7 +26,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Patient List Main</title>
-<script language="JavaScript" src="main.js" charset="UTF-8"></script>
+<script src="/main.js" charset="UTF-8"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -47,8 +50,7 @@ hr {
 			<h1 style="font: 60px arial" size="30">Patient Information Management System</h1>
 		</div>
 		<div style="text-align: right;">
-			<h3><%=name%>님 반갑습니다.
-			</h3>
+			<h3>소속 : <%=hospital_name%> / 이름 : <%=name%></h3>
 			<input type="reset" value="로그아웃" class="btn btn-default"
 				onclick="javascript:window.location='logout.jsp'">&nbsp;&nbsp;&nbsp;
 		</div>
@@ -71,7 +73,13 @@ hr {
 		</form>
 		<h2>환자 진단 기록</h2>
 		<br>
-		<c:if test="${ list }">
+		<c:if test="${list != null }">
+			<form>
+				<div class="form-group">
+					<input type="button" class="btn btn-default" onclick="addPatientSheet();" value="<%=patient_name %> 진단서 추가">
+				</div>
+			</form>
+		</c:if>
 			<c:forEach items="${list}" var="dto">
 				<form action="updateTodo.do" method="post" name="${f}${dto.issue_number}" style="text-align:left">
 					<input type="hidden" name="data_id" value="${dto.issue_number}">
@@ -89,11 +97,11 @@ hr {
 					</div>
 					<div class="form-group">
 						<label for="content">진단 내용</label>
-						<input type="text" name="diagnosis_content" id="content" class="form-control" value="${dto.content}" readonly>
+						<textarea name="diganosis_content" id="content" class="form-control" style="height:200px" readonly>${dto.content}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="content">진단 내용</label>
-						<input type="date" name="diagnosis_date" id="dDate" class="form-control" value="${dto.diagnosis_date}">
+						<label for="content">진단 날짜</label>
+						<input type="date" name="diagnosis_date" id="dDate" class="form-control" value="${dto.diagnosis_date}" readonly>
 					</div>
 					<div class=form-group>
 						<input type="button" value="수정" class="btn btn-default" onclick="modifyData(${f}${dto.issue_number})">
@@ -101,7 +109,18 @@ hr {
 				</form>
 				<hr>
 			</c:forEach>
-		</c:if>
 	</div>
 </body>
+<script>
+function addPatientSheet(){
+	var url = "addDataForm.jsp";
+	window.open(url, "addForm", "width=600px,height=1000px,resizable=0,toolbars=no,scrollbars=no");
+}
+
+function modifyPatientSheet(frm){
+	var url = "modifyDataForm.jsp";
+	window.open(url, "modifyFrom", "width=600px,height=1000px,resizable=0,toolbars=no,scrollbars=no");
+}
+
+</script>
 </html>

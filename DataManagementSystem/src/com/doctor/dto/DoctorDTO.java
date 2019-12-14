@@ -5,6 +5,12 @@ public class DoctorDTO {
 	private String name;
 	private String hospital_name;
 	
+	public DoctorDTO(int license, String name, String hostpital_name) {
+		this.license_number = license;
+		this.name = name;
+		this.hospital_name = hostpital_name;
+	}
+	
 	
 	public int getLicense_number() {
 		return license_number;

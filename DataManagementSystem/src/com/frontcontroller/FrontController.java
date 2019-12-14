@@ -16,7 +16,9 @@ import com.data.command.DListCommand;
 import com.data.command.DModifiyCommand;
 import com.doctor.command.DTAuthLicense;
 import com.employee.command.EMPAuthNumber;
+import com.hospitalsheet.command.HSAddSheet;
 import com.hospitalsheet.command.HSGetSheet;
+import com.hospitalsheet.command.HSModify;
 import com.member.command.MGetOtpQRCode;
 import com.member.command.MIdCheckCommand;
 import com.member.command.MJoinCommand;
@@ -120,7 +122,7 @@ public class FrontController extends HttpServlet {
 			else
 				viewPage = "updateFail.jsp";
 		} else if (com.equals("/modifyData.do")) {
-			cmd = new DModifiyCommand();
+			cmd = new HSModify();
 			int ret = cmd.execute(request, response);
 			if (ret == 1)
 				viewPage = "modifyOk.jsp";
@@ -149,6 +151,13 @@ public class FrontController extends HttpServlet {
 				viewPage = "getSheetOk.jsp";
 			else
 				viewPage = "getSheetFail.jsp";
+		} else if(com.equals("/addPatientSheet.do")) {
+			cmd = new HSAddSheet();
+			int ret = cmd.execute(request, response);
+			if(ret == 1)
+				viewPage = "addDataOk.html";
+			else
+				viewPage = "addDataFail.html";
 		}
 		else {
 			viewPage = "notExistCommand.jsp";

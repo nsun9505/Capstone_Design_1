@@ -6,7 +6,6 @@
 <jsp:forward page="index.html" />
 <%
 	}
-	String doctor_id = (String) session.getAttribute("id");
 	String doctor_name = (String) session.getAttribute("name");
 	String hospital_name = (String) session.getAttribute("hospital_name");
 	String patient_name = (String) session.getAttribute("search_patient_name");
@@ -31,7 +30,7 @@
 	<div class="container" style="width:600px; margin: 0 auto;">
 		<h2 style="text-align:center">환자 진단서 입력</h2>
 		<hr size="20px">
-		<form action="addPatientSheet.do" method="post" name="addDataForm">
+		<form action="modifyPatientSheet.do" method="post" name="modifyDataForm">
 			<div class="form-group">
 				환자 이름 : <input type="text" class="form-control" name="patient_name" value = "<%=patient_name %>"
 					maxlength="10" readonly>
@@ -49,8 +48,7 @@
 					maxlength="20" readonly>
 			</div>
 			<div class="form-group">
-				진단 날짜 : <input type="date" class="form-control"
-					name="diagnosis_date" id="add_dDate" readonly>
+				진단 날짜 : <input type="date" class="form-control" name="diagnosis_date" id="modify_dDate" readonly>
 			</div>
 			<div class="form-group">
 				진단 내용 : <textarea class="form-control" name="diagnosis_content" id="new_content" style="height:300px"></textarea>
@@ -63,7 +61,6 @@
 	</div>
 </body>
 <script>
-		document.getElementById('add_dDate').value = new Date().toISOString().substring(0, 10);
 		function cancelWindow(){
 			self.close();
 		}
