@@ -73,7 +73,7 @@ hr {
 		</form>
 		<h2>환자 진단 기록</h2>
 		<br>
-		<c:if test="${list != null }">
+		<c:if test="${list != null && account_type eq 'doctor'}">
 			<form>
 				<div class="form-group">
 					<input type="button" class="btn btn-default" onclick="addPatientSheet();" value="<%=patient_name %> 진단서 추가">
@@ -97,15 +97,17 @@ hr {
 					</div>
 					<div class="form-group">
 						<label for="content">진단 내용</label>
-						<textarea name="diganosis_content" id="content" class="form-control" style="height:200px" readonly>${dto.content}</textarea>
+						<textarea name="diagnosis_content" id="content" class="form-control" style="height:200px" readonly>${dto.content}</textarea>
 					</div>
 					<div class="form-group">
 						<label for="content">진단 날짜</label>
 						<input type="date" name="diagnosis_date" id="dDate" class="form-control" value="${dto.diagnosis_date}" readonly>
 					</div>
+					<c:if test="${account_type eq 'doctor'}">
 					<div class=form-group>
-						<input type="button" value="수정" class="btn btn-default" onclick="modifyData(${f}${dto.issue_number})">
+						<input type="button" value="수정" class="btn btn-default" onclick="modifyPatientSheet(${f}${dto.issue_number});">
 					</div>
+					</c:if>
 				</form>
 				<hr>
 			</c:forEach>
@@ -117,7 +119,7 @@ function addPatientSheet(){
 	window.open(url, "addForm", "width=600px,height=1000px,resizable=0,toolbars=no,scrollbars=no");
 }
 
-function modifyPatientSheet(frm){
+function modifyPatientSheet(content){
 	var url = "modifyDataForm.jsp";
 	window.open(url, "modifyFrom", "width=600px,height=1000px,resizable=0,toolbars=no,scrollbars=no");
 }

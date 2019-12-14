@@ -1,5 +1,7 @@
 package com.hospitalsheet.dto;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.CharBuffer;
 import java.sql.Date;
 
 public class HospitalSheetDTO {
@@ -78,6 +80,4 @@ public class HospitalSheetDTO {
 	public void setPrint_date(Date print_date) {
 		this.print_date = print_date;
 	}
-	
-	
 }

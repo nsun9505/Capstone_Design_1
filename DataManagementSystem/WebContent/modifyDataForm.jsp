@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="java.util.*" %>
 <%
 	if (session.getAttribute("ValidMem") == null) {
 %>
@@ -28,9 +29,10 @@
 </head>
 <body>
 	<div class="container" style="width:600px; margin: 0 auto;">
-		<h2 style="text-align:center">환자 진단서 입력</h2>
+		<h2 style="text-align:center">환자 진단서 수정</h2>
 		<hr size="20px">
 		<form action="modifyPatientSheet.do" method="post" name="modifyDataForm">
+			<input type="hidden" value="modify" name="operation_type">
 			<div class="form-group">
 				환자 이름 : <input type="text" class="form-control" name="patient_name" value = "<%=patient_name %>"
 					maxlength="10" readonly>
@@ -48,29 +50,30 @@
 					maxlength="20" readonly>
 			</div>
 			<div class="form-group">
-				진단 날짜 : <input type="date" class="form-control" name="diagnosis_date" id="modify_dDate" readonly>
+				수정 진단 날짜 : <input type="date" class="form-control" name="diagnosis_date" id="modify_dDate" readonly>
 			</div>
 			<div class="form-group">
-				진단 내용 : <textarea class="form-control" name="diagnosis_content" id="new_content" style="height:300px"></textarea>
+				진단 내용 : <textarea class="form-control" name="diagnosis_content" id="new_content" style="height:300px">[수정 내용 입력]</textarea>
 			</div>
 			<div class="form-group" style="text-align:right">
-				<input type="submit" class="btn btn-default" value="추가" onclick="addPatientSheetData();"/>
+				<input type="submit" class="btn btn-default" value="추가" onclick="modifyPatientSheetData();"/>
 				<input type="button" class="btn btn-default" value="취소" onclick="self.close();"/>
 			</div>
 		</form>
 	</div>
 </body>
 <script>
+		document.getElementById('modify_dDate').value = new Date().toISOString().substring(0, 10);
 		function cancelWindow(){
 			self.close();
 		}
-		function addPatientSheetData(){
+		function modifyPatientSheetData(){
 			var content = document.getElementById("new_content").value.replace(/\s/gi, "");
 			if(content == "")
 			{
-				alert("진단 내용을 입력해주세요.");
-			}else {
-				addDataForm.submit();
+				alert("수정할 진단 내용을 입력해주세요.");
+			}else{
+				modifyDataForm.submit();
 			}
 		}
 </script>

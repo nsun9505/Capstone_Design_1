@@ -32,6 +32,7 @@
 		<h2 style="text-align:center">환자 진단서 입력</h2>
 		<hr size="20px">
 		<form action="addPatientSheet.do" method="post" name="addDataForm">
+			<input type="hidden" value="add" name="operation_type">
 			<div class="form-group">
 				환자 이름 : <input type="text" class="form-control" name="patient_name" value = "<%=patient_name %>"
 					maxlength="10" readonly>

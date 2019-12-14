@@ -30,9 +30,11 @@ public class MLoginCommand implements Command{
 				DoctorDTO DDto = DDao.isExistDoctor(Integer.parseInt(user_id));
 				session.setAttribute("name", DDto.getName());
 				session.setAttribute("hospital_name", DDto.getHospital_name());
+				session.setAttribute("account_type", "doctor");
 			} else {
 				session.setAttribute("name", EDto.getName());
 				session.setAttribute("hospital_name", EDto.getHospital_name());
+				session.setAttribute("account_type", "employee");
 			}
 		}
 		return ret;
